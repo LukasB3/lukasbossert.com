@@ -1,25 +1,20 @@
 :root {
   color-scheme: dark;
 
-  --bg: #151412;
-  --bg-raised: #1b1917;
-  --ink: #e8e4dc;
-  --ink-2: #a8a196;
-  --ink-3: #6e685f;
-  --rule: #2a2723;
-  --rule-strong: #3a3631;
-  --accent: #c4794a;
-  --accent-soft: rgba(196, 121, 74, 0.35);
+  --bg: #0b1526;
+  --ink: #ede7da;
+  --ink-2: #97a0b3;
+  --bar: #1a2540;
+  --bar-key: #283358;
+  --bar-hot: #3b5080;
+  --cursor: #f2c94c;
+  --accent: #9ccbff;
 
-  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-  --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
 
-  --measure: 62ch;
-  --gutter: clamp(16px, 5vw, 56px);
-  --step-0: 1.0625rem;
-  --step-1: 1.25rem;
-  --step-2: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
-  --step-3: clamp(1.9rem, 1.3rem + 2.6vw, 3rem);
-  --mono-size: 0.8125rem;
+  --gutter: clamp(20px, 4vw, 64px);
+  --text: 1.125rem;
+  --poster: clamp(1.75rem, 0.9rem + 3.6vw, 4rem);
+  --title: clamp(2.75rem, 1.5rem + 5.5vw, 6rem);
+  --list: clamp(1.5rem, 1rem + 1.6vw, 2.25rem);
 }

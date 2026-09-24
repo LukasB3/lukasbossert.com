@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import LinkList from '../components/LinkList.astro';
+import { ui, type Lang } from '../i18n';
+import projects from '../data/projects.json';
+
+interface Project {
+  name: string;
+  description: Record<Lang, string>;
+  url: string;
+  year: string;
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const items = (projects as Project[]).map((p) => ({
+  title: p.name,
+  detail: `${p.description[lang]}, ${p.year}`,
+  href: p.url,
+  external: true,
+}));
+---
+
+<Base lang={lang} page="projects">
+  <article class="page">
+    <h1 class="page-title">{t.projects.title}</h1>
+    <div class="page-body">
+      {items.length > 0 ? <LinkList items={items} label={t.nav.projects} /> : <p>{t.projects.soon}</p>}
+    </div>
+  </article>
+</Base>

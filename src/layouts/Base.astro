@@ -1,10 +1,5 @@
 ---
-import '@fontsource/newsreader/400.css';
-import '@fontsource/newsreader/400-italic.css';
-import '@fontsource/newsreader/500.css';
-import '@fontsource/ibm-plex-sans/400.css';
-import '@fontsource/ibm-plex-sans/500.css';
-import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource-variable/bricolage-grotesque/standard.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import { routes, ui, site, otherLang, type Lang, type PageKey } from '../i18n';
@@ -12,9 +7,10 @@ import { routes, ui, site, otherLang, type Lang, type PageKey } from '../i18n';
 interface Props {
   lang: Lang;
   page: PageKey | '404';
+  nav?: boolean;
 }
 
-const { lang, page } = Astro.props;
+const { lang, page, nav = true } = Astro.props;
 const t = ui[lang];
 const alt = otherLang(lang);
 const key: PageKey = page === '404' ? 'home' : page;
@@ -25,8 +21,7 @@ const enUrl = new URL(routes[key].en, Astro.site);
 const deUrl = new URL(routes[key].de, Astro.site);
 const title = page === 'home' ? site.name : `${t.titles[key]} · ${site.name}`;
 const description = t.meta[key];
-const navKeys: PageKey[] = ['about', 'thinking', 'contact'];
-const year = new Date().getFullYear();
+const navKeys: PageKey[] = ['about', 'projects', 'thinking', 'contact'];
 
 const person = {
   '@context': 'https://schema.org',
@@ -52,7 +47,7 @@ const person = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
-    <meta name="theme-color" content="#151412" />
+    <meta name="theme-color" content="#0b1526" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical.href} />
     <link rel="alternate" hreflang="en" href={enUrl.href} />
@@ -75,20 +70,21 @@ const person = {
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>
+    <slot name="backdrop" />
     <header class="site-header">
-      <a class="wordmark" href={routes.home[lang]}>{site.name}</a>
-      <nav aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
+      {page !== 'home' && <a class="wordmark" href={routes.home[lang]}>{t.nav.home}</a>}
+      <nav aria-label={t.navLabel}>
         <ul class="site-nav">
-          {navKeys.map((k) => (
+          {nav && navKeys.map((k) => (
             <li>
               <a href={routes[k][lang]} aria-current={k === page ? 'page' : undefined}>
                 {t.nav[k]}
               </a>
             </li>
           ))}
-          <li class="lang">
+          <li class:list={['lang', { divided: nav }]}>
             <a href={altPath} hreflang={alt} lang={alt} aria-label={t.langSwitch.label}>
-              {t.langSwitch.short}
+              {t.langSwitch.text}
             </a>
           </li>
         </ul>
@@ -98,10 +94,8 @@ const person = {
       <slot />
     </main>
     <footer class="site-footer">
-      <span>{site.name} · {site.city} · {year}</span>
-      <span>
-        {t.footer.built} <a href={site.repo} rel="noopener">{t.footer.source}</a>
-      </span>
+      <span>{t.footer.place}</span>
+      <slot name="footer" />
     </footer>
   </body>
 </html>

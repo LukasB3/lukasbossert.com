@@ -6,9 +6,11 @@ const t = ui.en;
 ---
 
 <Base lang="en" page="404">
-  <div class="column">
-    <span class="kicker">404</span>
+  <div class="page">
     <h1 class="page-title">{t.notFound.title}</h1>
-    <p><a href={routes.home.en}>{t.notFound.back}</a> · <a href={routes.home.de} lang="de">{ui.de.notFound.back}</a></p>
+    <div class="page-body">
+      <p><a href={routes.home.en}>{t.notFound.back}</a></p>
+      <p lang="de"><a href={routes.home.de}>{ui.de.notFound.back}</a></p>
+    </div>
   </div>
 </Base>

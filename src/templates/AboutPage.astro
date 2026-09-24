@@ -1,17 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import IndexList from '../components/IndexList.astro';
 import { ui, type Lang } from '../i18n';
-import projects from '../data/projects.json';
-import { Content as AboutEn } from '../content/en/about.md';
-import { Content as AboutDe } from '../content/de/about.md';
-
-interface Project {
-  name: string;
-  description: Record<Lang, string>;
-  url: string;
-  year: string;
-}
 
 interface Props {
   lang: Lang;
@@ -19,36 +8,13 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-const Content = lang === 'de' ? AboutDe : AboutEn;
-const work = (projects as Project[]).map((p, i) => ({
-  n: String(i + 1).padStart(2, '0'),
-  title: p.name,
-  detail: `${p.description[lang]} · ${p.year}`,
-  href: p.url,
-  external: true,
-}));
 ---
 
 <Base lang={lang} page="about">
-  <article class="column">
-    <span class="kicker">{t.nav.about}</span>
+  <article class="page">
     <h1 class="page-title">{t.about.title}</h1>
-    <div class="prose">
-      <Content />
+    <div class="page-body">
+      <p>{t.about.soon}</p>
     </div>
-    <dl class="facts">
-      {t.facts.map(([k, v]) => (
-        <div>
-          <dt>{k}</dt>
-          <dd>{v}</dd>
-        </div>
-      ))}
-    </dl>
-    {work.length > 0 && (
-      <section>
-        <h2 class="kicker">{t.about.work}</h2>
-        <IndexList items={work} label={t.about.work} />
-      </section>
-    )}
   </article>
 </Base>

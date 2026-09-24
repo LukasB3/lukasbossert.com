@@ -1,0 +1,25 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<canvas class="minimap" role="img" aria-label={label} data-minimap></canvas>
+
+<script>
+  import { mount } from '../scripts/minimap';
+  document.querySelectorAll<HTMLCanvasElement>('[data-minimap]').forEach(mount);
+</script>
+
+<style>
+  .minimap {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>
