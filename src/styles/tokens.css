@@ -1,20 +1,17 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #0b1526;
-  --ink: #ede7da;
-  --ink-2: #97a0b3;
-  --bar: #1a2540;
-  --bar-key: #283358;
-  --bar-hot: #3b5080;
-  --cursor: #f2c94c;
-  --accent: #9ccbff;
+  --bg: #eef0f3;
+  --ink: #14171c;
+  --ink-2: #5b6270;
+  --line: #b8bec9;
+  --accent: #0f7a5c;
 
-  --font: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
 
   --gutter: clamp(20px, 4vw, 64px);
-  --text: 1.125rem;
-  --poster: clamp(1.75rem, 0.9rem + 3.6vw, 4rem);
-  --title: clamp(2.75rem, 1.5rem + 5.5vw, 6rem);
-  --list: clamp(1.5rem, 1rem + 1.6vw, 2.25rem);
+  --text: 1.0625rem;
+  --poster: clamp(1.8rem, 0.9rem + 3.3vw, 3.9rem);
+  --title: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
+  --list: clamp(1.4rem, 1rem + 1.4vw, 2rem);
 }

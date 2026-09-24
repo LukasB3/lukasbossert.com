@@ -6,15 +6,15 @@ interface Props {
 const { label } = Astro.props;
 ---
 
-<canvas class="minimap" role="img" aria-label={label} data-minimap></canvas>
+<canvas class="pipeline" role="img" aria-label={label} data-pipeline></canvas>
 
 <script>
-  import { mount } from '../scripts/minimap';
-  document.querySelectorAll<HTMLCanvasElement>('[data-minimap]').forEach(mount);
+  import { mount } from '../scripts/pipeline';
+  document.querySelectorAll<HTMLCanvasElement>('[data-pipeline]').forEach(mount);
 </script>
 
 <style>
-  .minimap {
+  .pipeline {
     position: fixed;
     inset: 0;
     width: 100%;

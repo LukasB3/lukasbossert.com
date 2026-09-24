@@ -1,49 +1,40 @@
-// Renders public/og.png (1200x630) from an SVG. Needs Bricolage Grotesque visible
-// to fontconfig (see CLAUDE.md); falls back to a system sans otherwise.
+// Renders public/og.png (1200x630) from an SVG. Needs Archivo visible to
+// fontconfig (see CLAUDE.md); falls back to a system sans otherwise.
 import sharp from 'sharp';
 import { writeFile } from 'node:fs/promises';
 
 const W = 1200;
 const H = 630;
-const bg = '#0b1526';
-const ink = '#ede7da';
-const ink2 = '#97a0b3';
-const bar = '#1a2540';
-const hot = '#3b5080';
-const cursor = '#f2c94c';
-const font = 'Bricolage Grotesque, Helvetica Neue, Arial, sans-serif';
+const bg = '#eef0f3';
+const ink = '#14171c';
+const ink2 = '#5b6270';
+const line = '#b8bec9';
+const accent = '#0f7a5c';
+const font = 'Archivo, Helvetica Neue, Arial, sans-serif';
 
-let seed = 7;
-const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-
-const rowH = 12;
-const bars = [];
-for (const x0 of [40, 640]) {
-  let indent = 0;
-  let inBlock = 0;
-  for (let y = 24; y < H; y += rowH) {
-    if (inBlock <= 0) {
-      if (rnd() < 0.5) { inBlock = 0; continue; }
-      inBlock = 3 + Math.floor(rnd() * 9);
-      indent = 0;
-    }
-    indent = Math.max(0, Math.min(3, indent + (rnd() < 0.5 ? 1 : -1)));
-    const len = (420 - indent * 20) * (0.15 + rnd() * 0.7);
-    const warm = rnd() < 0.08;
-    bars.push(`<rect x="${x0 + indent * 20}" y="${y}" width="${len.toFixed(0)}" height="4" fill="${warm ? hot : bar}"/>`);
-    if (warm && rnd() < 0.5) bars.push(`<rect x="${(x0 + indent * 20 + len + 3).toFixed(0)}" y="${y - 2}" width="3" height="8" fill="${cursor}"/>`);
-    inBlock--;
-  }
-}
+const nodes = [
+  [120, 400], [120, 520],
+  [400, 380], [400, 460], [400, 540],
+  [700, 400], [700, 520],
+  [980, 460],
+];
+const links = [[0, 2], [0, 3], [1, 3], [1, 4], [2, 5], [3, 5], [3, 6], [4, 6], [5, 7], [6, 7]];
+const route = ([ax, ay], [bx, by]) => {
+  const xm = (ax + bx) / 2;
+  return `M${ax} ${ay}H${xm}V${by}H${bx}`;
+};
+const wires = links.map(([a, b], i) => `<path d="${route(nodes[a], nodes[b])}" fill="none" stroke="${i === 3 || i === 7 ? accent : line}" stroke-width="${i === 3 || i === 7 ? 2 : 1.5}"/>`).join('');
+const boxes = nodes.map(([x, y], i) => `<rect x="${x - 8}" y="${y - 8}" width="16" height="16" fill="${i < 2 ? ink : bg}" stroke="${ink}" stroke-width="1.5"/>`).join('');
+const packets = [[250, 400], [560, 460], [840, 400]].map(([x, y], i) => `<rect x="${x - 4}" y="${y - 4}" width="8" height="8" fill="${i === 1 ? accent : ink}"/>`).join('');
 
 const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <rect width="${W}" height="${H}" fill="${bg}"/>
-  ${bars.join('')}
-  <text x="64" y="92" font-family="${font}" font-weight="600" font-size="30" fill="${ink}">Lukas Bossert</text>
-  <text x="64" y="414" font-family="${font}" font-weight="500" font-size="62" letter-spacing="-1.5" fill="${ink}">Software engineer focused on reliable</text>
-  <text x="64" y="482" font-family="${font}" font-weight="500" font-size="62" letter-spacing="-1.5" fill="${ink}">data pipelines and practical AI integration.</text>
-  <text x="${W - 64}" y="92" text-anchor="end" font-family="${font}" font-size="26" fill="${ink2}">lukasbossert.com</text>
+  ${wires}${boxes}${packets}
+  <text x="64" y="150" font-family="${font}" font-weight="700" font-stretch="expanded" font-size="58" letter-spacing="-1.5" fill="${ink}">Software engineer focused on</text>
+  <text x="64" y="214" font-family="${font}" font-weight="700" font-stretch="expanded" font-size="58" letter-spacing="-1.5" fill="${ink}">reliable data pipelines and</text>
+  <text x="64" y="278" font-family="${font}" font-weight="700" font-stretch="expanded" font-size="58" letter-spacing="-1.5" fill="${ink}">practical AI integration.</text>
+  <text x="${W - 64}" y="${H - 56}" text-anchor="end" font-family="${font}" font-size="24" fill="${ink2}">Lukas Bossert, Ulm</text>
 </svg>`;
 
 const png = await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
