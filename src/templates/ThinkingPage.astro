@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, type Lang } from '../i18n';
+import { Content as ThinkingEn } from '../content/en/thinking.md';
+import { Content as ThinkingDe } from '../content/de/thinking.md';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const Content = lang === 'de' ? ThinkingDe : ThinkingEn;
+---
+
+<Base lang={lang} page="thinking">
+  <article class="column">
+    <span class="kicker">{t.nav.thinking}</span>
+    <h1 class="page-title">{t.thinking.title}</h1>
+    <p class="lede">{t.thinking.lede}</p>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

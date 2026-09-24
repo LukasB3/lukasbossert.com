@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import IndexList from '../components/IndexList.astro';
+import { site, ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const items = [
+  { n: '01', title: t.contact.email, detail: site.email, href: `mailto:${site.email}` },
+  { n: '02', title: 'GitHub', detail: site.github.replace('https://', ''), href: site.github, external: true },
+  { n: '03', title: 'LinkedIn', detail: 'linkedin.com/in/lukas-bossert', href: site.linkedin, external: true },
+  // CV: add public/cv-lukas-bossert.pdf and uncomment.
+  // { n: '04', title: 'CV', detail: 'PDF', href: '/cv-lukas-bossert.pdf' },
+];
+---
+
+<Base lang={lang} page="contact">
+  <div class="column">
+    <span class="kicker">{t.nav.contact}</span>
+    <h1 class="page-title">{t.contact.title}</h1>
+    <IndexList items={items} label={t.nav.contact} />
+  </div>
+</Base>

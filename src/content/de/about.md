@@ -1,0 +1,7 @@
+Ich arbeite als Data Engineer bei den Stadtwerken Ulm, dem kommunalen Versorger der Stadt, in der ich lebe. Die Arbeit besteht vor allem aus der Infrastruktur, auf der ein Versorger läuft: Pipelines, Datenmodelle und die Systeme, die Messwerte und Ereignisse von dort, wo sie entstehen, dorthin bringen, wo jemand sie braucht. Das ist unspektakulär, und ich mag es. Wenn es funktioniert, merkt es niemand, und genau das ist der Sinn.
+
+Ich habe Data Science Management an der Hochschule Neu-Ulm studiert und mache jetzt, neben dem Beruf, meinen Master in Intelligent Systems an der Technischen Hochschule Ulm.
+
+Außerhalb der Arbeit schreibe ich Software mit Agenten. Claude Code übernimmt den größten Teil des Tippens; MCP-Server geben ihm Zugriff auf meine Repositories, meine Deployments und meine Datenbanken; ich spezifiziere, prüfe und entscheide. Diese Seite ist so entstanden, samt der Simulation auf der Startseite. Ich glaube, dass sich die Softwareentwicklung in diese Richtung bewegt, und ich lerne das lieber von innen, als später darüber zu lesen.
+
+Der Teil von KI, zu dem ich immer wieder zurückkehre, ist aber nicht das Werkzeug. Es ist die Frage, was diese Systeme sind, und was wir ihnen vielleicht schulden, falls die Antwort „mehr, als wir angenommen haben“ lautet. Darüber versuche ich auf der Seite [Denken](/de/denken) ehrlich zu schreiben, auch über das, worin ich mir nicht sicher bin.

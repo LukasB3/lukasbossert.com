@@ -1,0 +1,16 @@
+# Claude
+CLAUDE.md
+.claude/
+
+# build
+node_modules/
+dist/
+.astro/
+.vercel/
+
+# env
+.env
+.env.*
+
+# os
+.DS_Store

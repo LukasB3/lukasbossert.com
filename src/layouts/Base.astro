@@ -1,0 +1,107 @@
+---
+import '@fontsource/newsreader/400.css';
+import '@fontsource/newsreader/400-italic.css';
+import '@fontsource/newsreader/500.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import { routes, ui, site, otherLang, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: PageKey | '404';
+}
+
+const { lang, page } = Astro.props;
+const t = ui[lang];
+const alt = otherLang(lang);
+const key: PageKey = page === '404' ? 'home' : page;
+const path = routes[key][lang];
+const canonical = new URL(path, Astro.site);
+const altPath = routes[key][alt];
+const enUrl = new URL(routes[key].en, Astro.site);
+const deUrl = new URL(routes[key].de, Astro.site);
+const title = page === 'home' ? site.name : `${t.titles[key]} · ${site.name}`;
+const description = t.meta[key];
+const navKeys: PageKey[] = ['about', 'thinking', 'contact'];
+const year = new Date().getFullYear();
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: Astro.site?.href,
+  jobTitle: 'Data Engineer',
+  worksFor: { '@type': 'Organization', name: 'Stadtwerke Ulm' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Hochschule Neu-Ulm' },
+    { '@type': 'CollegeOrUniversity', name: 'Technische Hochschule Ulm' },
+  ],
+  address: { '@type': 'PostalAddress', addressLocality: 'Ulm', addressCountry: 'DE' },
+  sameAs: [site.github, site.linkedin],
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#151412" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="en" href={enUrl.href} />
+    <link rel="alternate" hreflang="de" href={deUrl.href} />
+    <link rel="alternate" hreflang="x-default" href={enUrl.href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content={page === 'home' ? 'profile' : 'website'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'de' ? 'en_US' : 'de_DE'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {page === 'home' && <script type="application/ld+json" is:inline set:html={JSON.stringify(person)} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">{t.skip}</a>
+    <header class="site-header">
+      <a class="wordmark" href={routes.home[lang]}>{site.name}</a>
+      <nav aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
+        <ul class="site-nav">
+          {navKeys.map((k) => (
+            <li>
+              <a href={routes[k][lang]} aria-current={k === page ? 'page' : undefined}>
+                {t.nav[k]}
+              </a>
+            </li>
+          ))}
+          <li class="lang">
+            <a href={altPath} hreflang={alt} lang={alt} aria-label={t.langSwitch.label}>
+              {t.langSwitch.short}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>{site.name} · {site.city} · {year}</span>
+      <span>
+        {t.footer.built} <a href={site.repo} rel="noopener">{t.footer.source}</a>
+      </span>
+    </footer>
+  </body>
+</html>

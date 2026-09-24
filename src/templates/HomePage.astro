@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import AgentField from '../components/AgentField.astro';
+import IndexList from '../components/IndexList.astro';
+import { routes, ui, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const keys: Exclude<PageKey, 'home'>[] = ['about', 'thinking', 'contact'];
+const items = keys.map((k, i) => ({
+  n: String(i + 1).padStart(2, '0'),
+  title: t.nav[k],
+  detail: t.index[k],
+  href: routes[k][lang],
+}));
+---
+
+<Base lang={lang} page="home">
+  <div class="column hero">
+    <span class="kicker">{t.kicker}</span>
+    <h1 class="tagline">{t.tagline}</h1>
+  </div>
+  <AgentField lang={lang} />
+  <section class="column contents">
+    <h2 class="kicker">{t.indexHeading}</h2>
+    <IndexList items={items} label={t.indexHeading} />
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-bottom: 3rem;
+  }
+
+  .tagline {
+    font-size: var(--step-3);
+    line-height: 1.15;
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+
+  .contents {
+    margin-top: 3.5rem;
+  }
+</style>

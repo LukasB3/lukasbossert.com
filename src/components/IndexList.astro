@@ -1,0 +1,28 @@
+---
+interface Item {
+  n: string;
+  title: string;
+  detail?: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  items: Item[];
+  label: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<ul class="index" aria-label={label}>
+  {items.map((item) => (
+    <li>
+      <a href={item.href} rel={item.external ? 'noopener me' : undefined}>
+        <span class="n">{item.n}</span>
+        <span class="t">{item.title}</span>
+        {item.detail && <span class="d">{item.detail}</span>}
+      </a>
+    </li>
+  ))}
+</ul>

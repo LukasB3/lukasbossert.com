@@ -1,0 +1,84 @@
+---
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<figure class="field" data-agent-field>
+  <canvas class="field-canvas" role="img" aria-label={t.fieldCaption}></canvas>
+  <noscript><p class="field-noscript mono">{t.fieldNoScript}</p></noscript>
+  <figcaption class="field-caption">
+    <span class="mono">{t.fieldCaption}</span>
+    <button
+      type="button"
+      class="field-toggle mono"
+      data-pause={t.fieldPause}
+      data-resume={t.fieldResume}
+      aria-pressed="false"
+      hidden
+    >
+      {t.fieldPause}
+    </button>
+  </figcaption>
+</figure>
+
+<script>
+  import { mount } from '../scripts/agents';
+  document.querySelectorAll<HTMLElement>('[data-agent-field]').forEach(mount);
+</script>
+
+<style>
+  .field {
+    margin: 0 calc(-1 * var(--gutter));
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .field-canvas {
+    width: 100%;
+    height: clamp(320px, 56vh, 580px);
+    touch-action: pan-y;
+    cursor: crosshair;
+  }
+
+  .field-noscript {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: var(--gutter);
+    text-align: center;
+  }
+
+  .field-caption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding: 0.75rem var(--gutter);
+    border-top: 1px solid var(--rule);
+  }
+
+  .field-caption .mono {
+    color: var(--ink-3);
+  }
+
+  .field-toggle {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-soft);
+    text-underline-offset: 0.2em;
+  }
+
+  .field-toggle:hover,
+  .field-toggle:focus-visible {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+</style>
