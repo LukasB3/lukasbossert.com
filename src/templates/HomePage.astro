@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Pipeline from '../components/Pipeline.astro';
-import { routes, ui, type Lang, type PageKey } from '../i18n';
+import { routes, ui, type Lang, type NavKey } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -9,10 +9,10 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-const keys: Exclude<PageKey, 'home'>[] = ['about', 'projects', 'thinking', 'contact'];
+const keys: NavKey[] = ['about', 'projects', 'thinking', 'contact'];
 ---
 
-<Base lang={lang} page="home" nav={false}>
+<Base lang={lang} page="home">
   <Fragment slot="backdrop">
     <Pipeline label={t.canvasLabel} />
     <nav class="station-nav" aria-label={t.navLabel} data-station-nav>
@@ -58,6 +58,11 @@ const keys: Exclude<PageKey, 'home'>[] = ['about', 'projects', 'thinking', 'cont
     transform: translate(-50%, -50%);
   }
 
+  .station-nav.placed a:hover,
+  .station-nav.placed a:focus-visible {
+    z-index: 3;
+  }
+
   .name {
     display: block;
     padding: 0.45em 0.85em;
@@ -76,10 +81,13 @@ const keys: Exclude<PageKey, 'home'>[] = ['about', 'projects', 'thinking', 'cont
     left: 50%;
     transform: translateX(-50%);
     width: 24ch;
+    padding: 0.5em 0.8em;
+    background: var(--bg);
     text-align: center;
     white-space: normal;
+    font-size: 0.95rem;
     line-height: 1.3;
-    color: var(--ink-2);
+    color: var(--ink);
     opacity: 0;
     pointer-events: none;
     transition: opacity 180ms 60ms;
@@ -104,7 +112,7 @@ const keys: Exclude<PageKey, 'home'>[] = ['about', 'projects', 'thinking', 'cont
   }
 
   .poster {
-    padding: 2.5rem var(--gutter) 0;
+    padding: 1.5rem var(--gutter) 0;
   }
 
   h1 {
@@ -118,12 +126,6 @@ const keys: Exclude<PageKey, 'home'>[] = ['about', 'projects', 'thinking', 'cont
     margin: 0;
     max-width: 30ch;
     line-height: 1.4;
-  }
-
-  @media (min-width: 720px) {
-    .where {
-      text-align: right;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {

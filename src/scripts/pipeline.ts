@@ -124,7 +124,7 @@ export function mount(canvas: HTMLCanvasElement) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     vertical = W < 720;
 
-    const gutter = parseFloat(getComputedStyle(document.querySelector('.site-header') ?? document.body).paddingLeft) || 28;
+    const gutter = parseFloat(getComputedStyle(document.querySelector('.poster') ?? document.body).paddingLeft) || 28;
     const headline = document.querySelector('.poster h1')?.getBoundingClientRect();
     const footer = document.querySelector('.site-footer')?.getBoundingClientRect();
     const top = (headline?.bottom ?? H * 0.3) + (vertical ? 28 : 48);

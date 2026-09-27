@@ -2,15 +2,14 @@
 import '@fontsource-variable/archivo/standard.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
-import { routes, ui, site, otherLang, type Lang, type PageKey } from '../i18n';
+import { routes, ui, site, otherLang, type Lang, type NavKey, type PageKey } from '../i18n';
 
 interface Props {
   lang: Lang;
   page: PageKey | '404';
-  nav?: boolean;
 }
 
-const { lang, page, nav = true } = Astro.props;
+const { lang, page } = Astro.props;
 const t = ui[lang];
 const alt = otherLang(lang);
 const key: PageKey = page === '404' ? 'home' : page;
@@ -21,7 +20,7 @@ const enUrl = new URL(routes[key].en, Astro.site);
 const deUrl = new URL(routes[key].de, Astro.site);
 const title = page === 'home' ? site.name : `${t.titles[key]} · ${site.name}`;
 const description = t.meta[key];
-const navKeys: PageKey[] = ['about', 'projects', 'thinking', 'contact'];
+const navKeys: NavKey[] = ['about', 'projects', 'thinking', 'contact'];
 
 const person = {
   '@context': 'https://schema.org',
@@ -71,31 +70,37 @@ const person = {
   <body>
     <a class="skip" href="#main">{t.skip}</a>
     <slot name="backdrop" />
-    <header class="site-header">
-      {page !== 'home' && <a class="wordmark" href={routes.home[lang]}>{t.nav.home}</a>}
-      <nav aria-label={t.navLabel}>
-        <ul class="site-nav">
-          {nav && navKeys.map((k) => (
-            <li>
-              <a href={routes[k][lang]} aria-current={k === page ? 'page' : undefined}>
-                {t.nav[k]}
-              </a>
-            </li>
-          ))}
-          <li class:list={['lang', { divided: nav }]}>
-            <a href={altPath} hreflang={alt} lang={alt} aria-label={t.langSwitch.label}>
-              {t.langSwitch.text}
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    {page !== 'home' && (
+      <header class="site-header">
+        <a class="wordmark" href={routes.home[lang]}>{t.nav.home}</a>
+        {page !== 'legal' && (
+          <nav aria-label={t.navLabel}>
+            <ul class="site-nav">
+              {navKeys.map((k) => (
+                <li>
+                  <a href={routes[k][lang]} aria-current={k === page ? 'page' : undefined}>
+                    {t.nav[k]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </header>
+    )}
     <main id="main">
       <slot />
     </main>
     <footer class="site-footer">
-      <span>{t.footer.place}</span>
-      <slot name="footer" />
+      {Astro.slots.has('footer') && (
+        <div class="footer-side">
+          <slot name="footer" />
+        </div>
+      )}
+      <nav class="footer-nav" aria-label={t.footer.label}>
+        {page !== 'legal' && <a href={routes.legal[lang]}>{t.footer.legal}</a>}
+        <a href={altPath} hreflang={alt} lang={alt} aria-label={t.footer.otherLangLabel}>{t.footer.otherLang}</a>
+      </nav>
     </footer>
   </body>
 </html>

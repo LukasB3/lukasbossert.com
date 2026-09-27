@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<Base lang={lang} page="legal">
+  <article class="page">
+    <h1 class="page-title">{t.legal.title}</h1>
+    <div class="page-body">
+      <p>{t.legal.intro}</p>
+      <p class="address">
+        {site.name}<br />
+        {site.street}<br />
+        {site.postal}
+      </p>
+      <h2>{t.legal.contact}</h2>
+      <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <h2>{t.legal.responsible}</h2>
+      <p class="address">
+        {site.name}<br />
+        {site.street}<br />
+        {site.postal}
+      </p>
+      {t.legal.sections.map((s) => (
+        <>
+          <h2>{s.h}</h2>
+          <p>{s.p}</p>
+        </>
+      ))}
+      <p class="note">{t.legal.note}</p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  h2 {
+    margin-top: 2.25rem;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .address {
+    line-height: 1.5;
+  }
+
+  .note {
+    margin-top: 2.5rem;
+    color: var(--ink-2);
+  }
+</style>
