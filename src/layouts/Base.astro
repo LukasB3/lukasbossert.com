@@ -100,7 +100,6 @@ const person = {
       )}
       <nav class="footer-nav" aria-label={t.footer.label}>
         {page !== 'legal' && <a href={routes.legal[lang]}>{t.footer.legal}</a>}
-        {page !== 'legal' && <a href={`${routes.legal[lang]}#privacy`}>{t.footer.privacy}</a>}
         <a href={altPath} hreflang={alt} lang={alt} aria-label={t.footer.otherLangLabel}>{t.footer.otherLang}</a>
       </nav>
     </footer>

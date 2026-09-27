@@ -20,6 +20,12 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
   data-assistant={t.assistant}
 >
   <button class="chat-toggle" type="button" data-chat-toggle aria-expanded="false" aria-controls="chat-panel">
+    <svg class="chat-icon" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+      <path d="M2.5 3.5h15v10h-8.5l-4.5 3.5v-3.5h-2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+      <circle cx="7" cy="8.5" r="1" fill="currentColor" />
+      <circle cx="10" cy="8.5" r="1" fill="currentColor" />
+      <circle cx="13" cy="8.5" r="1" fill="currentColor" />
+    </svg>
     {t.open}
   </button>
   <section class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title" data-chat-panel hidden>
@@ -35,7 +41,7 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
       <button type="submit">{t.send}</button>
     </form>
     <p class="chat-note">
-      {t.note}
+      {t.note}{' '}
       <a href={privacyHref}>{t.privacy}</a>
     </p>
   </section>
@@ -70,11 +76,29 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
     transition: background 120ms, color 120ms, border-color 120ms;
   }
 
+  .chat-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.1rem 0.7rem 0.9rem;
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 6px 18px -8px rgb(20 23 28 / 0.45);
+  }
+
   .chat-toggle:hover,
-  .chat-toggle:focus-visible,
-  .chat-form button:hover,
-  .chat-form button:focus-visible,
+  .chat-toggle:focus-visible {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
   .is-open .chat-toggle {
+    display: none;
+  }
+
+  .chat-form button:hover,
+  .chat-form button:focus-visible {
     background: var(--accent);
     color: var(--bg);
     border-color: var(--accent);
@@ -83,6 +107,10 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
   .chat-form button:disabled {
     opacity: 0.5;
     cursor: default;
+  }
+
+  .chat-panel[hidden] {
+    display: none;
   }
 
   .chat-panel {

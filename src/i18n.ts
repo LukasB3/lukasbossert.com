@@ -42,7 +42,7 @@ export const ui = {
     projects: { title: 'Projects', soon: 'A few projects will be listed here soon.' },
     thinking: { title: 'Thinking', soon: 'Something will be posted here soon.' },
     contact: { title: 'The easiest way to reach me is email.', email: 'Email' },
-    footer: { label: 'Legal and language', legal: 'Legal notice', privacy: 'Privacy', otherLang: 'Deutsch', otherLangLabel: 'Auf Deutsch lesen' },
+    footer: { label: 'Legal and language', legal: 'Legal notice', otherLang: 'Deutsch', otherLangLabel: 'Auf Deutsch lesen' },
     legal: {
       title: 'Legal notice',
       intro: 'Information required under Section 5 of the German Digital Services Act (DDG).',
@@ -64,7 +64,7 @@ export const ui = {
       ],
     },
     chat: {
-      open: 'Questions?',
+      open: 'Chat',
       title: 'Ask me',
       close: 'Close chat',
       closeShort: 'Close',
@@ -132,7 +132,7 @@ export const ui = {
     projects: { title: 'Projekte', soon: 'Hier stehen bald ein paar Projekte.' },
     thinking: { title: 'Denken', soon: 'Hier erscheint bald etwas.' },
     contact: { title: 'Am einfachsten erreicht man mich per E-Mail.', email: 'E-Mail' },
-    footer: { label: 'Rechtliches und Sprache', legal: 'Impressum', privacy: 'Datenschutz', otherLang: 'English', otherLangLabel: 'Read in English' },
+    footer: { label: 'Rechtliches und Sprache', legal: 'Impressum', otherLang: 'English', otherLangLabel: 'Read in English' },
     legal: {
       title: 'Impressum',
       intro: 'Angaben gemäß § 5 DDG.',
@@ -154,7 +154,7 @@ export const ui = {
       ],
     },
     chat: {
-      open: 'Fragen?',
+      open: 'Chat',
       title: 'Fragen Sie mich',
       close: 'Chat schließen',
       closeShort: 'Schließen',

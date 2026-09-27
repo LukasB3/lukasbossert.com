@@ -8,6 +8,8 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'never',
   },
+  // Never inline small scripts either; the CSP allows only external ones.
+  vite: { build: { assetsInlineLimit: 0 } },
   // Static site; only src/pages/api/chat.ts opts into on-demand rendering.
   adapter: vercel({ maxDuration: 30 }),
   i18n: {
