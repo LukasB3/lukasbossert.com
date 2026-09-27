@@ -1,13 +1,15 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://lukasbossert.com',
   trailingSlash: 'never',
   build: {
-    format: 'file',
     inlineStylesheets: 'never',
   },
+  // Static site; only src/pages/api/chat.ts opts into on-demand rendering.
+  adapter: vercel({ maxDuration: 30 }),
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'de'],

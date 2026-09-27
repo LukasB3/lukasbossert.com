@@ -34,6 +34,14 @@ const t = ui[lang];
           <p>{s.p}</p>
         </>
       ))}
+      <h2 class="privacy" id="privacy">{t.privacy.title}</h2>
+      <p>{t.privacy.intro}</p>
+      {t.privacy.sections.map((s) => (
+        <>
+          <h3>{s.h}</h3>
+          <p>{s.p}</p>
+        </>
+      ))}
     </div>
   </article>
 </Base>
@@ -43,6 +51,21 @@ const t = ui[lang];
     margin-top: 2.25rem;
     font-size: 1.25rem;
     line-height: 1.2;
+  }
+
+  .privacy {
+    margin-top: 4rem;
+    font-size: 1.75rem;
+    scroll-margin-top: 2rem;
+  }
+
+  h3 {
+    margin: 2rem 0 0;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    font-weight: 700;
+    font-variation-settings: 'wdth' 112;
+    letter-spacing: -0.02em;
   }
 
   .address {
