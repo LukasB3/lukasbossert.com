@@ -20,8 +20,8 @@ export const site = {
   repo: 'https://github.com/LukasB3/lukasbossert.com',
   city: 'Ulm',
   // Postal address for the legal notice. Replace before going live.
-  street: 'Musterstraße 1',
-  postal: '89073 Ulm',
+  street: 'Marienstraße 10',
+  postal: '89231 Neu-Ulm',
 };
 
 export const ui = {
@@ -62,7 +62,6 @@ export const ui = {
           p: 'The content and works on these pages created by me are subject to German copyright law. Reproduction, editing, distribution and any kind of use beyond the limits of copyright law require my written consent. Downloads and copies of this site are permitted for private, non-commercial use only. Where content on this site was not created by me, the copyrights of third parties are respected and such content is marked as such. Should you nevertheless become aware of a copyright infringement, please let me know. If I become aware of any infringement, I will remove the content in question without delay.',
         },
       ],
-      note: 'This is a private website. The template for this notice comes from publicly available sample legal notices and is not legal advice.',
     },
     meta: {
       home: 'Lukas Bossert, software engineer in Ulm, focused on reliable data pipelines and practical AI integration.',
@@ -112,7 +111,6 @@ export const ui = {
           p: 'Die durch mich erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen meiner schriftlichen Zustimmung. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht von mir erstellt wurden, werden die Urheberrechte Dritter beachtet und solche Inhalte als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.',
         },
       ],
-      note: 'Dies ist eine private Website. Die Vorlage für dieses Impressum stammt aus öffentlich verfügbaren Musterimpressen und ist keine Rechtsberatung.',
     },
     meta: {
       home: 'Lukas Bossert, Softwareentwickler in Ulm, mit Schwerpunkt auf zuverlässigen Datenpipelines und der praktischen Integration von KI.',
