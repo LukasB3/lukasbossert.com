@@ -103,6 +103,6 @@ const person = {
         <a href={altPath} hreflang={alt} lang={alt} aria-label={t.footer.otherLangLabel}>{t.footer.otherLang}</a>
       </nav>
     </footer>
-    <Chat lang={lang} />
+    {page !== 'legal' && <Chat lang={lang} />}
   </body>
 </html>

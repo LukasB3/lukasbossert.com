@@ -14,7 +14,7 @@ export const routes: Record<PageKey, Record<Lang, string>> = {
 
 export const site = {
   name: 'Lukas Bossert',
-  email: 'bossert-dev@gmail.com',
+  email: 'bossert.dev@gmail.com',
   github: 'https://github.com/LukasB3',
   linkedin: 'https://www.linkedin.com/in/lukas-bossert-818538237/',
   repo: 'https://github.com/LukasB3/lukasbossert.com',
