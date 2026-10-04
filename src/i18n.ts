@@ -19,7 +19,6 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/lukas-bossert-818538237/',
   repo: 'https://github.com/LukasB3/lukasbossert.com',
   city: 'Ulm',
-  // Postal address for the legal notice. Replace before going live.
   street: 'Marienstraße 10',
   postal: '89231 Neu-Ulm',
 };
@@ -39,7 +38,7 @@ export const ui = {
     where: 'Data engineer at Stadtwerke Ulm. Studying Intelligent Systems at Technische Hochschule Ulm.',
     canvasLabel: 'A data pipeline: sources on the left, sinks on the right, and the sections of this site as stations in between.',
     about: { title: 'About', soon: 'Something about me will be posted here soon.' },
-    projects: { title: 'Projects', soon: 'A few projects will be listed here soon.' },
+    projects: { title: 'Projects', soon: 'A few projects will be listed here soon.', live: 'Live site', source: 'Source on GitHub' },
     thinking: { title: 'Thinking', soon: 'Something will be posted here soon.' },
     contact: { title: 'The easiest way to reach me is email.', email: 'Email' },
     footer: { label: 'Legal and language', legal: 'Legal notice', otherLang: 'Deutsch', otherLangLabel: 'Auf Deutsch lesen' },
@@ -107,7 +106,7 @@ export const ui = {
     meta: {
       home: 'Lukas Bossert, software engineer in Ulm, focused on reliable data pipelines and practical AI integration.',
       about: 'About Lukas Bossert, data engineer in Ulm. More soon.',
-      projects: 'Projects by Lukas Bossert. More soon.',
+      projects: 'Projects by Lukas Bossert, among them a live parking and transit map of Ulm.',
       thinking: 'Notes by Lukas Bossert. More soon.',
       contact: 'Email, GitHub and LinkedIn for Lukas Bossert.',
       legal: 'Legal notice and privacy policy for lukasbossert.com.',
@@ -129,7 +128,7 @@ export const ui = {
     where: 'Data Engineer bei den Stadtwerken Ulm. Studium Intelligent Systems an der Technischen Hochschule Ulm.',
     canvasLabel: 'Eine Datenpipeline: Quellen links, Senken rechts, und die Bereiche dieser Seite als Stationen dazwischen.',
     about: { title: 'Über mich', soon: 'Hier steht bald etwas über mich.' },
-    projects: { title: 'Projekte', soon: 'Hier stehen bald ein paar Projekte.' },
+    projects: { title: 'Projekte', soon: 'Hier stehen bald ein paar Projekte.', live: 'Live ansehen', source: 'Quellcode auf GitHub' },
     thinking: { title: 'Denken', soon: 'Hier erscheint bald etwas.' },
     contact: { title: 'Am einfachsten erreicht man mich per E-Mail.', email: 'E-Mail' },
     footer: { label: 'Rechtliches und Sprache', legal: 'Impressum', otherLang: 'English', otherLangLabel: 'Read in English' },
@@ -197,7 +196,7 @@ export const ui = {
     meta: {
       home: 'Lukas Bossert, Softwareentwickler in Ulm, mit Schwerpunkt auf zuverlässigen Datenpipelines und der praktischen Integration von KI.',
       about: 'Über Lukas Bossert, Data Engineer in Ulm. Bald mehr.',
-      projects: 'Projekte von Lukas Bossert. Bald mehr.',
+      projects: 'Projekte von Lukas Bossert, darunter eine Live-Karte für Parkhäuser und Nahverkehr in Ulm.',
       thinking: 'Notizen von Lukas Bossert. Bald mehr.',
       contact: 'E-Mail, GitHub und LinkedIn von Lukas Bossert.',
       legal: 'Impressum und Datenschutzerklärung von lukasbossert.com.',

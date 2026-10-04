@@ -17,7 +17,7 @@ const { items, label } = Astro.props;
 <ul class="links" aria-label={label}>
   {items.map((item) => (
     <li>
-      <a href={item.href} rel={item.external ? 'noopener me' : undefined}>
+      <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener me' : undefined}>
         <span class="t">{item.title}</span>
         {item.detail && <span class="d">{item.detail}</span>}
       </a>

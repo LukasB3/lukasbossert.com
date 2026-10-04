@@ -1,15 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import LinkList from '../components/LinkList.astro';
 import { ui, type Lang } from '../i18n';
-import projects from '../data/projects.json';
-
-interface Project {
-  name: string;
-  description: Record<Lang, string>;
-  url: string;
-  year: string;
-}
+import { projects } from '../data/projects';
 
 interface Props {
   lang: Lang;
@@ -17,19 +10,30 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-const items = (projects as Project[]).map((p) => ({
-  title: p.name,
-  detail: `${p.description[lang]}, ${p.year}`,
-  href: p.url,
-  external: true,
-}));
 ---
 
 <Base lang={lang} page="projects">
   <article class="page">
     <h1 class="page-title">{t.projects.title}</h1>
-    <div class="page-body">
-      {items.length > 0 ? <LinkList items={items} label={t.nav.projects} /> : <p>{t.projects.soon}</p>}
+    <div class="page-body projects">
+      {projects.length === 0 && <p>{t.projects.soon}</p>}
+      {projects.map((p) => (
+        <section class="project">
+          <a class="project-shot" href={p.url} target="_blank" rel="noopener" tabindex="-1">
+            <Image src={p.image} alt={p.imageAlt[lang]} widths={[640, 960, 1280, 2000]} sizes="(min-width: 900px) 55vw, 92vw" />
+          </a>
+          <h2 class="project-name">
+            <a href={p.url} target="_blank" rel="noopener">{p.name[lang]}</a>
+            <span class="project-year">{p.year}</span>
+          </h2>
+          <p>{p.description[lang]}</p>
+          <p class="project-stack">{p.stack.join(', ')}</p>
+          <p class="project-links">
+            <a href={p.url} target="_blank" rel="noopener">{t.projects.live}</a>
+            {p.repo && <a href={p.repo} target="_blank" rel="noopener">{t.projects.source}</a>}
+          </p>
+        </section>
+      ))}
     </div>
   </article>
 </Base>

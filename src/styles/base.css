@@ -213,6 +213,78 @@ main {
   color: var(--accent);
 }
 
+/* Projects */
+
+.projects {
+  max-width: 54rem;
+}
+
+.project + .project {
+  margin-top: clamp(3.5rem, 9vh, 6rem);
+}
+
+.project-shot {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.project-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  transition: outline-color 120ms;
+}
+
+.project:has(.project-shot:hover, .project-name a:hover, .project-name a:focus-visible) .project-shot img {
+  outline-color: var(--accent);
+}
+
+.project-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1.25rem;
+  margin-bottom: 0.6rem;
+  font-size: var(--list);
+  font-variation-settings: 'wdth' 110;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.project-name a {
+  text-decoration: none;
+}
+
+.project:has(.project-shot:hover) .project-name a {
+  color: var(--accent);
+}
+
+.project-year {
+  color: var(--ink-2);
+  font-size: var(--text);
+  font-weight: 400;
+  font-variation-settings: 'wdth' 100;
+  letter-spacing: 0;
+}
+
+.project p {
+  max-width: 34rem;
+  margin-bottom: 0.5em;
+}
+
+.project-stack {
+  color: var(--ink-2);
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.75rem;
+  margin-top: 1rem;
+}
+
 /* Footer */
 
 .site-footer {
