@@ -141,7 +141,9 @@ export function mount(canvas: HTMLCanvasElement) {
       const along = k / (sizes.length - 1);
       return Array.from({ length: count }, (_, i) => {
         const across = count === 1 ? 0.5 : 0.12 + (i / (count - 1)) * 0.76;
-        const wobble = count === 1 ? 0 : rand(-0.05, 0.05);
+        // Stations stay evenly spaced so an opened box never reaches its neighbour.
+        const station = navAt.some(([s, j]) => s === k && j === i);
+        const wobble = count === 1 || station ? 0 : rand(-0.05, 0.05);
         const v = across + wobble;
         const n = vertical
           ? makeNode(left + v * (right - left), top + along * (bottom - top), k)

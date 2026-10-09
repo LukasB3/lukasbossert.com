@@ -1,13 +1,13 @@
 export const locales = ['en', 'de'] as const;
 export type Lang = (typeof locales)[number];
-export type NavKey = 'about' | 'projects' | 'thinking' | 'contact';
+export type NavKey = 'about' | 'projects' | 'notes' | 'contact';
 export type PageKey = 'home' | NavKey | 'legal';
 
 export const routes: Record<PageKey, Record<Lang, string>> = {
   home: { en: '/', de: '/de' },
   about: { en: '/about', de: '/de/ueber-mich' },
   projects: { en: '/projects', de: '/de/projekte' },
-  thinking: { en: '/thinking', de: '/de/denken' },
+  notes: { en: '/notes', de: '/de/notizen' },
   contact: { en: '/contact', de: '/de/kontakt' },
   legal: { en: '/legal', de: '/de/impressum' },
 };
@@ -25,21 +25,21 @@ export const site = {
 
 export const ui = {
   en: {
-    nav: { home: 'Home', about: 'About', projects: 'Projects', thinking: 'Thinking', contact: 'Contact' },
+    nav: { home: 'Home', about: 'About', projects: 'Projects', notes: 'Notes', contact: 'Contact' },
     navInfo: {
-      about: 'Who I am and what I work on.',
-      projects: 'Things I have built.',
-      thinking: 'Notes on what I am learning.',
-      contact: 'Email, GitHub, LinkedIn.',
+      about: 'Who I am and what I work on',
+      projects: 'What I’ve built on my own',
+      notes: 'Personal thoughts on AI',
+      contact: 'Email, GitHub, LinkedIn',
     },
     skip: 'Skip to content',
     navLabel: 'Main navigation',
     tagline: 'Software engineer focused on reliable data pipelines and practical AI integration.',
     where: 'Data engineer at Stadtwerke Ulm. Studying Intelligent Systems at Technische Hochschule Ulm.',
     canvasLabel: 'A data pipeline: sources on the left, sinks on the right, and the sections of this site as stations in between.',
-    about: { title: 'About', soon: 'Something about me will be posted here soon.' },
+    about: { title: 'About', tech: 'Technologies I use in production', applications: 'Applications', applicationsNote: 'Applications I’ve worked on at SWU, all of them running in production.', theses: 'Theses', thesisTitle: 'Title', agents: 'Developing with AI agents' },
     projects: { title: 'Projects', soon: 'A few projects will be listed here soon.', live: 'Live site', source: 'Source on GitHub' },
-    thinking: { title: 'Thinking', soon: 'Something will be posted here soon.' },
+    notes: { title: 'Notes', soon: 'Something will be posted here soon.' },
     contact: { title: 'The easiest way to reach me is email.', email: 'Email' },
     footer: { label: 'Legal and language', legal: 'Legal notice', otherLang: 'Deutsch', otherLangLabel: 'Auf Deutsch lesen' },
     legal: {
@@ -105,31 +105,31 @@ export const ui = {
     },
     meta: {
       home: 'Lukas Bossert, software engineer in Ulm, focused on reliable data pipelines and practical AI integration.',
-      about: 'About Lukas Bossert, data engineer in Ulm. More soon.',
+      about: 'About Lukas Bossert: data engineering at Stadtwerke Ulm/Neu-Ulm, Intelligent Systems at Technische Hochschule Ulm, technologies, applications and theses.',
       projects: 'Projects by Lukas Bossert, among them a live parking and transit map of Ulm.',
-      thinking: 'Notes by Lukas Bossert. More soon.',
+      notes: 'Notes by Lukas Bossert. More soon.',
       contact: 'Email, GitHub and LinkedIn for Lukas Bossert.',
       legal: 'Legal notice and privacy policy for lukasbossert.com.',
     },
-    titles: { home: 'Lukas Bossert', about: 'About', projects: 'Projects', thinking: 'Thinking', contact: 'Contact', legal: 'Legal notice' },
+    titles: { home: 'Lukas Bossert', about: 'About', projects: 'Projects', notes: 'Notes', contact: 'Contact', legal: 'Legal notice' },
     notFound: { title: 'Nothing at this address.', back: 'Back to the start' },
   },
   de: {
-    nav: { home: 'Start', about: 'Über mich', projects: 'Projekte', thinking: 'Denken', contact: 'Kontakt' },
+    nav: { home: 'Start', about: 'Über mich', projects: 'Projekte', notes: 'Notizen', contact: 'Kontakt' },
     navInfo: {
-      about: 'Wer ich bin und woran ich arbeite.',
-      projects: 'Dinge, die ich gebaut habe.',
-      thinking: 'Notizen zu dem, was ich gerade lerne.',
-      contact: 'E-Mail, GitHub, LinkedIn.',
+      about: 'Wer ich bin und woran ich arbeite',
+      projects: 'Was ich selbst entwickelt habe',
+      notes: 'Persönliche Gedanken zu KI',
+      contact: 'E-Mail, GitHub, LinkedIn',
     },
     skip: 'Zum Inhalt',
     navLabel: 'Hauptnavigation',
     tagline: 'Softwareentwickler mit Schwerpunkt auf zuverlässigen Datenpipelines und der praktischen Integration von KI.',
     where: 'Data Engineer bei den Stadtwerken Ulm. Studium Intelligent Systems an der Technischen Hochschule Ulm.',
     canvasLabel: 'Eine Datenpipeline: Quellen links, Senken rechts, und die Bereiche dieser Seite als Stationen dazwischen.',
-    about: { title: 'Über mich', soon: 'Hier steht bald etwas über mich.' },
+    about: { title: 'Über mich', tech: 'Technologien, die ich produktiv einsetze', applications: 'Anwendungen', applicationsNote: 'Anwendungen, an denen ich bei der SWU gearbeitet habe und die alle produktiv im Einsatz sind.', theses: 'Abschlussarbeiten', thesisTitle: 'Titel', agents: 'Entwicklung mit KI-Agenten' },
     projects: { title: 'Projekte', soon: 'Hier stehen bald ein paar Projekte.', live: 'Live ansehen', source: 'Quellcode auf GitHub' },
-    thinking: { title: 'Denken', soon: 'Hier erscheint bald etwas.' },
+    notes: { title: 'Notizen', soon: 'Hier erscheint bald etwas.' },
     contact: { title: 'Am einfachsten erreicht man mich per E-Mail.', email: 'E-Mail' },
     footer: { label: 'Rechtliches und Sprache', legal: 'Impressum', otherLang: 'English', otherLangLabel: 'Read in English' },
     legal: {
@@ -195,13 +195,13 @@ export const ui = {
     },
     meta: {
       home: 'Lukas Bossert, Softwareentwickler in Ulm, mit Schwerpunkt auf zuverlässigen Datenpipelines und der praktischen Integration von KI.',
-      about: 'Über Lukas Bossert, Data Engineer in Ulm. Bald mehr.',
+      about: 'Über Lukas Bossert: Data Engineering bei den Stadtwerken Ulm/Neu-Ulm, Intelligent Systems an der Technischen Hochschule Ulm, Technologien, Anwendungen und Abschlussarbeiten.',
       projects: 'Projekte von Lukas Bossert, darunter eine Live-Karte für Parkhäuser und Nahverkehr in Ulm.',
-      thinking: 'Notizen von Lukas Bossert. Bald mehr.',
+      notes: 'Notizen von Lukas Bossert. Bald mehr.',
       contact: 'E-Mail, GitHub und LinkedIn von Lukas Bossert.',
       legal: 'Impressum und Datenschutzerklärung von lukasbossert.com.',
     },
-    titles: { home: 'Lukas Bossert', about: 'Über mich', projects: 'Projekte', thinking: 'Denken', contact: 'Kontakt', legal: 'Impressum' },
+    titles: { home: 'Lukas Bossert', about: 'Über mich', projects: 'Projekte', notes: 'Notizen', contact: 'Kontakt', legal: 'Impressum' },
     notFound: { title: 'Unter dieser Adresse gibt es nichts.', back: 'Zurück zum Anfang' },
   },
 } as const;

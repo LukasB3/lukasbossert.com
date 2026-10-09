@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ui, type Lang } from '../i18n';
+import { routes, ui, type Lang } from '../i18n';
+import { intro, tech, applications, theses, agents, type Entry } from '../data/about';
 
 interface Props {
   lang: Lang;
@@ -8,13 +9,55 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
+const groups: { heading: string; note?: string; entries: Entry[] }[] = [
+  { heading: t.about.applications, note: t.about.applicationsNote, entries: applications },
+  { heading: t.about.theses, entries: theses },
+];
 ---
 
 <Base lang={lang} page="about">
   <article class="page">
     <h1 class="page-title">{t.about.title}</h1>
-    <div class="page-body">
-      <p>{t.about.soon}</p>
+    <div class="page-body about">
+      {intro.map((p) => <p>{p[lang]}</p>)}
+
+      <h2>{t.about.tech}</h2>
+      <dl class="tech">
+        {tech.map((row) => (
+          <div>
+            <dt>{row.label[lang]}</dt>
+            <dd>{row.items}</dd>
+          </div>
+        ))}
+      </dl>
+
+      {groups.map((g) => (
+        <section>
+          <h2>{g.heading}</h2>
+          {g.note && <p class="entries-note">{g.note}</p>}
+          <ul class="entries">
+            {g.entries.map((e) => (
+              <li>
+                <details class="entry">
+                  <summary>
+                    <span class="entry-label">{e.label[lang]}{e.meta && <span class="entry-meta">{e.meta[lang]}</span>}</span>
+                    <span class="entry-short">{e.short[lang]}</span>
+                  </summary>
+                  <div class="entry-long">
+                    {e.title && <p class="entry-title"><span>{t.about.thesisTitle}:</span> {e.title[lang]}</p>}
+                    <p>{e.long[lang]}</p>
+                  </div>
+                </details>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <h2>{t.about.agents}</h2>
+      <p>
+        {`${agents.text[lang]} ${agents.before[lang]}`}<a href={routes.notes[lang]}>{agents.link[lang]}</a>{agents.after[lang]}
+      </p>
     </div>
   </article>
 </Base>

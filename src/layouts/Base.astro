@@ -21,7 +21,7 @@ const enUrl = new URL(routes[key].en, Astro.site);
 const deUrl = new URL(routes[key].de, Astro.site);
 const title = page === 'home' ? site.name : `${t.titles[key]} · ${site.name}`;
 const description = t.meta[key];
-const navKeys: NavKey[] = ['about', 'projects', 'thinking', 'contact'];
+const navKeys: NavKey[] = ['about', 'projects', 'notes', 'contact'];
 
 const person = {
   '@context': 'https://schema.org',

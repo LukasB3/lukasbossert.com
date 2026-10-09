@@ -213,6 +213,153 @@ main {
   color: var(--accent);
 }
 
+/* About */
+
+.about {
+  max-width: 40rem;
+}
+
+.about h2 {
+  margin: 2.75rem 0 1rem;
+  font-size: clamp(1.3rem, 1rem + 0.9vw, 1.7rem);
+  line-height: 1.15;
+}
+
+.tech {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.tech div {
+  display: grid;
+  gap: 0 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .tech div {
+    grid-template-columns: 12rem 1fr;
+  }
+}
+
+.tech dt {
+  color: var(--ink-2);
+}
+
+.tech dd {
+  margin: 0;
+}
+
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entries li + li {
+  margin-top: 1.1rem;
+}
+
+.entry summary {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  cursor: pointer;
+  list-style: none;
+}
+
+.entry summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Plus that turns into a minus when open */
+.entry summary::before,
+.entry summary::after {
+  content: '';
+  grid-area: 1 / 1;
+  align-self: center;
+  width: 0.7rem;
+  height: 2px;
+  background: currentColor;
+  transition: transform 160ms, background-color 120ms;
+}
+
+.entry summary::after {
+  transform: rotate(90deg);
+}
+
+.entry[open] summary::after {
+  transform: rotate(90deg) scaleX(0);
+}
+
+.entry-label {
+  grid-column: 2;
+  font-weight: 700;
+  font-variation-settings: 'wdth' 108;
+  transition: color 120ms;
+}
+
+.entry-meta {
+  margin-left: 0.6em;
+  color: var(--ink-2);
+  font-weight: 400;
+  font-variation-settings: 'wdth' 100;
+}
+
+.entry-short {
+  grid-column: 2;
+  color: var(--ink-2);
+}
+
+.entry summary:hover,
+.entry summary:focus-visible,
+.entry summary:hover .entry-label,
+.entry summary:focus-visible .entry-label {
+  color: var(--accent);
+}
+
+.entry summary:focus-visible {
+  outline-offset: 6px;
+}
+
+.entry-long {
+  padding: 0.75rem 0 0.5rem 1.6rem;
+}
+
+.entry-long p {
+  margin-bottom: 0.6em;
+}
+
+.entry-title {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.entry-title span {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.entries-note {
+  margin: -0.4rem 0 1.25rem;
+  color: var(--ink-2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    .entry {
+      interpolate-size: allow-keywords;
+    }
+    .entry::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition: block-size 220ms ease, content-visibility 220ms allow-discrete;
+    }
+    .entry[open]::details-content {
+      block-size: auto;
+    }
+  }
+}
+
 /* Projects */
 
 .projects {
