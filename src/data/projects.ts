@@ -19,8 +19,8 @@ export const projects: Project[] = [
   {
     name: { en: 'App Generator', de: 'App-Generator' },
     description: {
-      en: 'Type what you want, get a link to a working web app a few minutes later. An agent writes it inside a locked-down container, plain code checks every file, and the result goes live on its own page.',
-      de: 'Beschreiben, was man will, und wenige Minuten später einen Link zu einer funktionierenden Web-App bekommen. Ein Agent schreibt sie in einem abgeschotteten Container, schlichter Code prüft jede Datei, und das Ergebnis geht auf einer eigenen Seite live.',
+      en: 'Web application that turns a plain-language description into a working web app within a few minutes and delivers it as a link. An AI agent writes the code in an isolated container, then deterministic checks verify every file before the result is published automatically on its own page.',
+      de: 'Webanwendung, die aus einer Beschreibung in natürlicher Sprache innerhalb weniger Minuten eine lauffähige Web-App erzeugt und als Link bereitstellt. Ein KI-Agent schreibt den Code in einem isolierten Container, anschließend prüfen deterministische Checks jede Datei, bevor das Ergebnis automatisch auf einer eigenen Seite veröffentlicht wird.',
     },
     year: '2026',
     stack: ['Fastify', 'SQLite', 'Docker', 'Claude Code', 'GitHub Pages'],
@@ -35,8 +35,8 @@ export const projects: Project[] = [
   {
     name: { en: 'Drive or Bus Ulm?', de: 'Auto oder Bus Ulm?' },
     description: {
-      en: 'A live map of Ulm that shows how full the city-centre car parks are and where every bus and tram is right now.',
-      de: 'Eine Live-Karte von Ulm, die zeigt, wie voll die Parkhäuser in der Innenstadt sind und wo jeder Bus und jede Straßenbahn gerade fährt.',
+      en: 'A live map of Ulm that shows how full the city-centre car parks are, where every bus and tram is right now and how late they are running.',
+      de: 'Eine Live-Karte von Ulm, die zeigt, wie voll die Parkhäuser in der Innenstadt sind, wo jeder Bus und jede Straßenbahn gerade fährt und wie viel Verspätung sie haben.',
     },
     year: '2026',
     stack: ['TypeScript', 'Leaflet', 'FastAPI', 'Supabase', 'WebSockets'],
