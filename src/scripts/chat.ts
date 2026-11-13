@@ -22,8 +22,9 @@ export function mount(root: HTMLElement) {
     assistant: root.dataset.assistant ?? '',
   };
 
-  // On a touch screen, focusing the textarea brings up the keyboard and shifts the page: leave that to the user's own tap.
   const touch = matchMedia('(pointer: coarse)');
+  const sheet = matchMedia('(max-width: 720px)');
+  const view = window.visualViewport;
 
   let messages: Message[] = [];
   let open = false;
@@ -57,16 +58,25 @@ export function mount(root: HTMLElement) {
     return p;
   };
 
+  // Phones: the sheet covers exactly the visible area, so the message field sits on top of the on-screen keyboard.
+  const fit = () => {
+    const fitted = open && sheet.matches && view;
+    if (fitted && Math.abs(view.scale - 1) > 0.01) return;
+    panel.style.height = fitted ? `${view.height}px` : '';
+    panel.style.top = fitted ? `${view.offsetTop}px` : '';
+  };
+
   const setOpen = (next: boolean) => {
     open = next;
     panel.hidden = !open;
     toggle.setAttribute('aria-expanded', String(open));
     root.classList.toggle('is-open', open);
+    document.documentElement.classList.toggle('chat-open', open);
     save();
+    fit();
     if (open) {
       scroll();
-      if (touch.matches) panel.focus({ preventScroll: true });
-      else input.focus();
+      input.focus();
     }
   };
 
@@ -118,12 +128,20 @@ export function mount(root: HTMLElement) {
     } finally {
       reply.classList.remove('pending');
       setBusy(false);
+      // On a touch screen this would bring the keyboard back up over the answer.
       if (open && !touch.matches) input.focus();
     }
   };
 
   for (const m of messages) bubble(m.role, m.content);
   setOpen(open);
+
+  view?.addEventListener('resize', () => {
+    fit();
+    scroll();
+  });
+  view?.addEventListener('scroll', fit);
+  sheet.addEventListener('change', fit);
 
   toggle.addEventListener('click', () => setOpen(!open));
   close.addEventListener('click', () => {
