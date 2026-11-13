@@ -119,6 +119,7 @@ main {
 
 .site-nav a {
   text-decoration: none;
+  white-space: nowrap;
   color: var(--ink-2);
 }
 
@@ -131,17 +132,44 @@ main {
   color: var(--accent);
 }
 
+/* Phones: wordmark and sections share one line; the type scales down so the German labels fit at 320px. */
 @media (max-width: 720px) {
-  .site-header {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .site-header nav {
-    margin-left: 0;
-  }
+  .site-header,
   .site-nav {
-    gap: 0.25rem 1.5rem;
+    flex-wrap: nowrap;
+    gap: clamp(0.6rem, 3.6vw, 1.5rem);
   }
+  .site-header {
+    font-size: clamp(0.8rem, 4.1vw, var(--text));
+  }
+  .wordmark,
+  .site-nav a {
+    padding-block: 0.6rem;
+    margin-block: -0.6rem;
+  }
+}
+
+/* Page change on phones and touch screens: the tapped station grows into the page title. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 720px),
+  (prefers-reduced-motion: no-preference) and (hover: none) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+::view-transition-group(title) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.3, 0, 0.1, 1);
+}
+
+/* The station box stretches onto the title's bounds; the title stays centred in it, undistorted. */
+::view-transition-old(title),
+::view-transition-new(title) {
+  height: 100%;
+}
+
+::view-transition-new(title) {
+  object-fit: contain;
 }
 
 /* Inner pages */
@@ -162,8 +190,10 @@ main {
 .page-title {
   font-size: var(--title);
   line-height: 0.95;
+  width: fit-content;
   max-width: 12ch;
   text-wrap: balance;
+  view-transition-name: title;
 }
 
 .page-body {

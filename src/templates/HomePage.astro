@@ -96,18 +96,36 @@ const keys: NavKey[] = ['about', 'projects', 'notes', 'contact'];
     display: grid;
   }
 
-  .station-nav a:hover,
-  .station-nav a:focus-visible {
+  .station-nav a:focus-visible,
+  .station-nav a:active,
+  .station-nav a.going {
     background: var(--accent);
     border-color: var(--accent);
     color: var(--bg);
   }
 
-  .station-nav a:hover .info,
-  .station-nav a:focus-visible .info {
-    grid-template-rows: 1fr;
-    width: auto;
-    opacity: 1;
+  /* A tapped station stays filled and becomes the next page's title (view transition, base.css). */
+  .station-nav a.going {
+    view-transition-name: title;
+    transition: none;
+  }
+
+  @media (hover: hover) {
+    .station-nav a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+  }
+
+  /* The box only opens for a real pointer on the wide layout; a tap could never finish it. */
+  @media (hover: hover) and (width > 720px) {
+    .station-nav a:hover .info,
+    .station-nav a:focus-visible .info {
+      grid-template-rows: 1fr;
+      width: auto;
+      opacity: 1;
+    }
   }
 
   .poster {
