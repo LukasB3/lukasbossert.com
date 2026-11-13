@@ -40,7 +40,7 @@ export const ui = {
     about: { title: 'About', tech: 'Technologies I use in production', applications: 'Applications', applicationsNote: 'Applications I’ve worked on at SWU, all of them running in production.', theses: 'Theses', thesisTitle: 'Title', agents: 'Developing with AI' },
     projects: { title: 'Projects', soon: 'A few projects will be listed here soon.', live: 'Live site', source: 'Source on GitHub' },
     notes: { title: 'Notes', soon: 'Something will be posted here soon.' },
-    contact: { title: 'The easiest way to reach me is email.', email: 'Email' },
+    contact: { title: 'Contact', lead: 'The easiest way to reach me is email.', email: 'Email' },
     footer: { label: 'Legal and language', legal: 'Legal notice', otherLang: 'Deutsch', otherLangLabel: 'Auf Deutsch lesen' },
     legal: {
       title: 'Legal notice',
@@ -130,7 +130,7 @@ export const ui = {
     about: { title: 'Über mich', tech: 'Technologien, die ich produktiv einsetze', applications: 'Anwendungen', applicationsNote: 'Anwendungen, an denen ich bei der SWU gearbeitet habe und die alle produktiv im Einsatz sind.', theses: 'Abschlussarbeiten', thesisTitle: 'Titel', agents: 'Entwicklung mit KI' },
     projects: { title: 'Projekte', soon: 'Hier stehen bald ein paar Projekte.', live: 'Live ansehen', source: 'Quellcode auf GitHub' },
     notes: { title: 'Notizen', soon: 'Hier erscheint bald etwas.' },
-    contact: { title: 'Am einfachsten erreicht man mich per E-Mail.', email: 'E-Mail' },
+    contact: { title: 'Kontakt', lead: 'Am einfachsten erreicht man mich per E-Mail.', email: 'E-Mail' },
     footer: { label: 'Rechtliches und Sprache', legal: 'Impressum', otherLang: 'English', otherLangLabel: 'Read in English' },
     legal: {
       title: 'Impressum',
