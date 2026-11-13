@@ -27,7 +27,7 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
       <circle cx="13" cy="8.5" r="1" fill="currentColor" />
     </svg>
   </button>
-  <section class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title" data-chat-panel hidden>
+  <section class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title" tabindex="-1" data-chat-panel hidden>
     <div class="chat-head">
       <h2 class="chat-title" id="chat-title">{t.title}</h2>
       <button class="chat-close" type="button" data-chat-close aria-label={t.close}>{t.closeShort}</button>
@@ -211,6 +211,17 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
 
   .chat-form textarea:focus-visible {
     outline-offset: -2px;
+  }
+
+  .chat-panel:focus-visible {
+    outline: none;
+  }
+
+  /* iOS zooms the whole page into a focused field whose text is smaller than 16px. */
+  @media (pointer: coarse) {
+    .chat-form textarea {
+      font-size: max(1rem, 16px);
+    }
   }
 
   .chat-form button {

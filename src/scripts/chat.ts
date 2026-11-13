@@ -22,6 +22,9 @@ export function mount(root: HTMLElement) {
     assistant: root.dataset.assistant ?? '',
   };
 
+  // On a touch screen, focusing the textarea brings up the keyboard and shifts the page: leave that to the user's own tap.
+  const touch = matchMedia('(pointer: coarse)');
+
   let messages: Message[] = [];
   let open = false;
   try {
@@ -62,7 +65,8 @@ export function mount(root: HTMLElement) {
     save();
     if (open) {
       scroll();
-      input.focus();
+      if (touch.matches) panel.focus({ preventScroll: true });
+      else input.focus();
     }
   };
 
@@ -114,7 +118,7 @@ export function mount(root: HTMLElement) {
     } finally {
       reply.classList.remove('pending');
       setBusy(false);
-      if (open) input.focus();
+      if (open && !touch.matches) input.focus();
     }
   };
 
