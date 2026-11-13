@@ -67,6 +67,14 @@ const person = {
     <meta property="og:locale:alternate" content={lang === 'de' ? 'en_US' : 'de_DE'} />
     <meta name="twitter:card" content="summary_large_image" />
     {page === 'home' && <script type="application/ld+json" is:inline set:html={JSON.stringify(person)} />}
+    <script>
+      // Only a tapped home-page station animates the page change (base.css); every other navigation stays instant.
+      addEventListener('pageswap', (e) => {
+        if (!e.viewTransition || document.querySelector('[data-station].going')) return;
+        e.viewTransition.ready.catch(() => {});
+        e.viewTransition.skipTransition();
+      });
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">{t.skip}</a>

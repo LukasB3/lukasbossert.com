@@ -149,7 +149,8 @@ main {
   }
 }
 
-/* Page change on phones and touch screens: the tapped station grows into the page title. */
+/* Phones and touch screens: a station tapped on the home page grows into the page title.
+   Every other navigation is skipped by the pageswap script in Base.astro. */
 @media (prefers-reduced-motion: no-preference) and (max-width: 720px),
   (prefers-reduced-motion: no-preference) and (hover: none) {
   @view-transition {

@@ -335,35 +335,18 @@ export function mount(canvas: HTMLCanvasElement) {
   });
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
 
-  const release = () => {
-    links.forEach((l) => l.classList.remove('going'));
-    setActive(null);
-    draw();
-  };
-
   links.forEach((link) => {
     const on = () => setActive(nodes.find((n) => n.link === link) ?? null);
     const off = () => setActive(null);
-    // A touch has no hover: it would light the route on the way down and drop it on release.
+    // A tap is not a hover: only a real pointer or keyboard focus lights the route.
     link.addEventListener('pointerenter', (e) => e.pointerType !== 'touch' && on());
     link.addEventListener('pointerleave', (e) => e.pointerType !== 'touch' && off());
-    link.addEventListener('focus', on);
+    link.addEventListener('focus', () => link.matches(':focus-visible') && on());
     link.addEventListener('blur', off);
-    link.addEventListener('click', (e) => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      release();
-      link.classList.add('going');
-      on();
-      draw();
-    });
+    link.addEventListener('click', () => links.forEach((l) => l.classList.toggle('going', l === link)));
   });
 
-  // Back from the page cache: the title travels back into its station, then the station lets go.
-  addEventListener('pagereveal', (e) => {
-    if (e.viewTransition) e.viewTransition.finished.then(release, release);
-    else release();
-  });
   addEventListener('pageshow', (e) => {
-    if (e.persisted && !('onpagereveal' in window)) release();
+    if (e.persisted) links.forEach((l) => l.classList.remove('going'));
   });
 }

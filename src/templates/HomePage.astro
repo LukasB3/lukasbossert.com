@@ -96,26 +96,24 @@ const keys: NavKey[] = ['about', 'projects', 'notes', 'contact'];
     display: grid;
   }
 
-  .station-nav a:focus-visible,
-  .station-nav a:active,
-  .station-nav a.going {
+  .station-nav a:focus-visible {
     background: var(--accent);
     border-color: var(--accent);
     color: var(--bg);
   }
 
-  /* A tapped station stays filled and becomes the next page's title (view transition, base.css). */
-  .station-nav a.going {
-    view-transition-name: title;
-    transition: none;
-  }
-
+  /* Touch screens keep :hover after a tap, so the fill is for real pointers only. */
   @media (hover: hover) {
     .station-nav a:hover {
       background: var(--accent);
       border-color: var(--accent);
       color: var(--bg);
     }
+  }
+
+  /* The clicked station becomes the next page's title (view transition on phones, base.css). */
+  .station-nav a.going {
+    view-transition-name: title;
   }
 
   /* The box only opens for a real pointer on the wide layout; a tap could never finish it. */
