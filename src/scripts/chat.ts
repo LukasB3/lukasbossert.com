@@ -66,12 +66,24 @@ export function mount(root: HTMLElement) {
     panel.style.top = fitted ? `${view.offsetTop}px` : '';
   };
 
+  // Phones: the page under the sheet is taken out of the layout (Chat.astro); closing puts it back where it was.
+  let covered = false;
+  let pageY = 0;
+  const cover = () => {
+    const next = open && sheet.matches;
+    if (next === covered) return;
+    covered = next;
+    if (covered) pageY = scrollY;
+    document.documentElement.classList.toggle('chat-open', covered);
+    if (!covered) scrollTo(0, pageY);
+  };
+
   const setOpen = (next: boolean) => {
     open = next;
     panel.hidden = !open;
     toggle.setAttribute('aria-expanded', String(open));
     root.classList.toggle('is-open', open);
-    document.documentElement.classList.toggle('chat-open', open);
+    cover();
     save();
     fit();
     if (open) {
@@ -141,7 +153,10 @@ export function mount(root: HTMLElement) {
     scroll();
   });
   view?.addEventListener('scroll', fit);
-  sheet.addEventListener('change', fit);
+  sheet.addEventListener('change', () => {
+    cover();
+    fit();
+  });
 
   toggle.addEventListener('click', () => setOpen(!open));
   close.addEventListener('click', () => {

@@ -267,6 +267,14 @@ const privacyHref = `${routes.legal[lang]}#privacy`;
       overflow: hidden;
     }
 
+    /* Inner pages leave the layout under the sheet, so nothing can scroll or show behind it (iOS scrolls a long page
+       despite overflow: hidden). chat.ts restores the scroll position on close. Home has no header and is one screen. */
+    :global(html.chat-open .site-header),
+    :global(html.chat-open .site-header ~ main),
+    :global(html.chat-open .site-header ~ .site-footer) {
+      display: none;
+    }
+
     .chat-close {
       margin-block: -0.6rem;
       padding: 0.8rem 0 0.8rem 1.5rem;
