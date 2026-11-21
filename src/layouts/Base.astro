@@ -22,6 +22,8 @@ const deUrl = new URL(routes[key].de, Astro.site);
 const title = page === 'home' ? site.name : `${t.titles[key]} · ${site.name}`;
 const description = t.meta[key];
 const navKeys: NavKey[] = ['about', 'projects', 'notes', 'contact'];
+// The legal notice and the privacy policy: no section nav, no chat, and not for search results.
+const legalPage = page === 'legal' || page === 'privacy';
 
 const person = {
   '@context': 'https://schema.org',
@@ -49,6 +51,7 @@ const person = {
     <meta name="author" content={site.name} />
     <meta name="theme-color" content="#eef0f3" />
     <meta name="generator" content={Astro.generator} />
+    {legalPage && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical.href} />
     <link rel="alternate" hreflang="en" href={enUrl.href} />
     <link rel="alternate" hreflang="de" href={deUrl.href} />
@@ -82,7 +85,7 @@ const person = {
     {page !== 'home' && (
       <header class="site-header">
         <a class="wordmark" href={routes.home[lang]}>{t.nav.home}</a>
-        {page !== 'legal' && (
+        {!legalPage && (
           <nav aria-label={t.navLabel}>
             <ul class="site-nav">
               {navKeys.map((k) => (
@@ -107,10 +110,11 @@ const person = {
         </div>
       )}
       <nav class="footer-nav" aria-label={t.footer.label}>
-        {page !== 'legal' && <a href={routes.legal[lang]}>{t.footer.legal}</a>}
+        <a href={routes.legal[lang]} aria-current={page === 'legal' ? 'page' : undefined}>{t.footer.legal}</a>
+        <a href={routes.privacy[lang]} aria-current={page === 'privacy' ? 'page' : undefined}>{t.footer.privacy}</a>
         <a href={altPath} hreflang={alt} lang={alt} aria-label={t.footer.otherLangLabel}>{t.footer.otherLang}</a>
       </nav>
     </footer>
-    {page !== 'legal' && <Chat lang={lang} />}
+    {!legalPage && <Chat lang={lang} />}
   </body>
 </html>
