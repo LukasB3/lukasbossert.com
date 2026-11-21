@@ -483,12 +483,17 @@ main {
 .footer-nav {
   grid-column: 2;
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
   font-size: 0.9rem;
 }
 
 .footer-nav a {
   text-decoration: none;
+}
+
+.footer-nav a[aria-current='page'] {
+  color: var(--ink);
 }
 
 @media (max-width: 720px) {
@@ -499,6 +504,10 @@ main {
   .footer-side,
   .footer-nav {
     grid-column: 1;
+  }
+  /* The chat button covers the bottom right corner: the links wrap before they reach it. */
+  .footer-nav {
+    padding-right: 4.5rem;
   }
 }
 

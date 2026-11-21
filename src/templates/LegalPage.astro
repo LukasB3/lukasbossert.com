@@ -1,47 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, ui, type Lang } from '../i18n';
+import { ui, type Lang } from '../i18n';
+import { legal, type Block, type Paragraph } from '../data/legal';
 
 interface Props {
   lang: Lang;
+  page: 'legal' | 'privacy';
 }
 
-const { lang } = Astro.props;
+const { lang, page } = Astro.props;
 const t = ui[lang];
+const doc = legal[lang][page];
+
+const isList = (block: Block): block is { list: Paragraph[] } => typeof block === 'object' && !Array.isArray(block);
+const parts = (paragraph: Paragraph) => (typeof paragraph === 'string' ? [paragraph] : paragraph);
 ---
 
-<Base lang={lang} page="legal">
+<Base lang={lang} page={page}>
   <article class="page">
-    <h1 class="page-title">{t.legal.title}</h1>
+    <h1 class="page-title">{t.titles[page]}</h1>
     <div class="page-body">
-      <p>{t.legal.intro}</p>
-      <p class="address">
-        {site.name}<br />
-        {site.street}<br />
-        {site.postal}
-      </p>
-      <h2>{t.legal.contact}</h2>
-      <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
-      <h2>{t.legal.responsible}</h2>
-      <p class="address">
-        {site.name}<br />
-        {site.street}<br />
-        {site.postal}
-      </p>
-      {t.legal.sections.map((s) => (
+      {doc.sections.map((section) => (
         <>
-          <h2>{s.h}</h2>
-          <p>{s.p}</p>
+          <h2 id={section.id}>{section.heading}</h2>
+          {section.body.map((block) =>
+            isList(block) ? (
+              <ul>{block.list.map((item) => <li>{parts(item).map((part) => (typeof part === 'string' ? part : <a href={part.href}>{part.text}</a>))}</li>)}</ul>
+            ) : (
+              <p>{parts(block).map((part) => (typeof part === 'string' ? part : <a href={part.href}>{part.text}</a>))}</p>
+            ),
+          )}
         </>
       ))}
-      <h2 class="privacy" id="privacy">{t.privacy.title}</h2>
-      <p>{t.privacy.intro}</p>
-      {t.privacy.sections.map((s) => (
-        <>
-          <h3>{s.h}</h3>
-          <p>{s.p}</p>
-        </>
-      ))}
+      <p class="updated">{doc.updated}</p>
     </div>
   </article>
 </Base>
@@ -51,24 +42,31 @@ const t = ui[lang];
     margin-top: 2.25rem;
     font-size: 1.25rem;
     line-height: 1.2;
-  }
-
-  .privacy {
-    margin-top: 4rem;
-    font-size: 1.75rem;
+    /* A section opened through its address (/privacy#chat) starts a little below the top. */
     scroll-margin-top: 2rem;
   }
 
-  h3 {
-    margin: 2rem 0 0;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    font-weight: 700;
-    font-variation-settings: 'wdth' 112;
-    letter-spacing: -0.02em;
+  h2:first-child {
+    margin-top: 0;
   }
 
-  .address {
-    line-height: 1.5;
+  /* An address keeps its lines. */
+  p {
+    white-space: pre-line;
+  }
+
+  ul {
+    margin: 0 0 1em;
+    padding-left: 1.2em;
+  }
+
+  li {
+    margin-bottom: 0.4em;
+  }
+
+  .updated {
+    margin: 2.5rem 0 0;
+    font-size: 0.9rem;
+    color: var(--ink-2);
   }
 </style>
